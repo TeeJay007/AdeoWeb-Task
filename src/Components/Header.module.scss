@@ -1,0 +1,142 @@
+@import '../global.scss';
+
+.header{
+    color: white;
+    text-transform: uppercase;
+    a{
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+    }
+
+    padding: 1rem;
+    @media (min-width: $mobile-screen) {
+        padding-bottom: 4rem;
+    }
+}
+
+.headerTop{
+    display: none;
+    @media (min-width: $mobile-screen) {
+        display: flex;
+        padding-top: 1rem;
+        padding-bottom: 3rem;
+        > a{
+            font-weight: normal;
+            padding: 0 0.50rem;
+            border-right: 1px solid white;
+        }
+        > a:last-child{
+            padding-right: 0;
+            border-right: none;
+        }
+        > a:first-child{
+            padding-left: 0;
+        }
+    }
+}
+
+.menuBtn{
+    display: flex;
+    color: white;
+    width: 2rem;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+
+    @media (min-width: $mobile-screen) {
+        display: none;
+    }
+}
+
+.menu{
+    display: none;
+    @media (min-width: $mobile-screen) {
+        display: flex;
+        position: relative;
+        > a{
+            margin: 0 0.5rem;
+        }
+        > a:last-child{
+            margin-right: 0;
+        }
+        > a:first-child{
+            margin-left: 0;
+        }
+    }
+}
+
+.menuItem{
+    position: relative;
+    > div{
+        display: none;
+    }
+    span{
+        font-weight: bold;
+        cursor: pointer;
+    }
+}
+
+.menuItem:hover > .hoverMenu{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 0.3rem;
+    width: 9rem;
+    
+    >.hoverLinks{
+        display: flex;
+        flex-direction: column;
+        background-color: $dark-color;
+        padding: 0.25rem;
+        >a{
+            padding: 0.5rem 1rem;
+        }
+        >a:hover{
+            background-color: white;
+            color: $dark-color;
+        }
+    }
+}
+
+.hoverTriangle{
+    width: 0;
+    height: 0;
+    align-self: center;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-bottom: 0.5rem solid $dark-color;
+}
+
+.mobileMenu{
+    display: flex;
+    flex-direction: column;
+
+    a, span{
+        padding: 1rem;
+        border-bottom: 1px solid rgb(235, 235, 235);
+        text-decoration: none;
+        color: $primary-color;
+    }
+
+    @media (min-width: $mobile-screen) {
+        display: none;
+    }
+}
+
+.mobileMenuView{
+    display: flex;
+    flex-direction: column;
+    a{
+        padding: 1rem;
+        color: white;
+        background-color: $primary-color;
+    }
+
+    > div{
+        display: flex;
+        flex-direction: column;
+    }
+}
