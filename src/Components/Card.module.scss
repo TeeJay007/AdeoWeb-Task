@@ -1,0 +1,11 @@
+@import '../global.scss';
+
+.card{
+    padding: 2rem;
+    margin: 0 1rem;
+    
+    @media (min-width: $mobile-screen) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
