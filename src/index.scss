@@ -26,6 +26,15 @@ code {
   }
 }
 
+.container-1-5{
+  margin: 1.5rem;
+  @media (min-width: $mobile-screen) {
+    max-width: $max-screen-w;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .md-flex{
   @media (min-width: $mobile-screen) {
     display: flex;

@@ -1,5 +1,7 @@
 import {footer, footerTop, footerLinks, copyright} from './Footer.module.scss'
 
+import {Link} from "react-router-dom";
+
 const Footer = ({mainLinks = []}) => {
     return(
         <footer className={footer}>
@@ -13,7 +15,7 @@ const Footer = ({mainLinks = []}) => {
                     </div>
                     <div className={footerLinks}>
                         <div>
-                            {mainLinks.map((link, k) => <a key={k} href={link.url || '#'}>{link.name}</a>)}
+                            {mainLinks.map((link, k) => <Link key={k} to={link.url || '/'}>{link.name}</Link>)}
                         </div>
                     </div>
                 </div>

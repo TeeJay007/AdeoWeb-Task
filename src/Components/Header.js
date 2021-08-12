@@ -11,6 +11,10 @@ import {
     mobileMenuView
 } from './Header.module.scss'
 
+import {
+    Link
+} from "react-router-dom";
+
 import {useState} from 'react'
 
 const Header = ({mainLinks = [], topLinks = []}) => {
@@ -23,7 +27,7 @@ const Header = ({mainLinks = [], topLinks = []}) => {
             <div className={mobileMenuView}>
                 <span onClick={() => setIsOpen(!isOpen)}>{title}</span>
                 <div className={`${isOpen ? '' : 'hidden '}`}>
-                    {links.map((innerLink, v) => <a key={v} href={innerLink.url}>{innerLink.name}</a>)}
+                    {links.map((innerLink, v) => <Link onClick={() => setMobileMenuState(false)} key={v} to={innerLink.url}>{innerLink.name}</Link>)}
                 </div>
             </div>
         )
@@ -34,12 +38,12 @@ const Header = ({mainLinks = [], topLinks = []}) => {
             <div className="bg-primary">
                 <div className={`container ${header}`}>
                     <div className={headerTop}>
-                        {topLinks.map((link, k) => <a key={k} href={link.url}>{link.name}</a>)}
+                        {topLinks.map((link, k) => <Link key={k} to={link.url}>{link.name}</Link>)}
                     </div>
                     <div className={`flex flex-row justify-between items-center`}>
-                        <div className="flex">
+                        <Link to='/' className="flex">
                             <img src={process.env.PUBLIC_URL + '/DEMOSITE.svg'} alt="demosite logo" />
-                        </div>
+                        </Link>
                         <div className={menuBtn} onClick={() => setMobileMenuState(!mobileMenuState)}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
@@ -52,12 +56,12 @@ const Header = ({mainLinks = [], topLinks = []}) => {
                                     <div className={hoverMenu}>
                                         <div className={hoverTriangle}></div>
                                         <div className={hoverLinks}>
-                                            {link.links.map((l, k) => <a key={k} href={l.url}>{l.name}</a>)}
+                                            {link.links.map((l, k) => <Link to={l.url} key={k} href={l.url}>{l.name}</Link>)}
                                         </div>
                                     </div>
                                 </div>
                                 :
-                                <a key={key} href={link.url}>{link.name}</a>
+                                <Link key={key} to={link.url}>{link.name}</Link>
                             )}
                         </div>
                     </div>
@@ -67,7 +71,7 @@ const Header = ({mainLinks = [], topLinks = []}) => {
                 {mainLinks.map((link, key) => link.links ? 
                     <MobileGroupList key={key} title={link.name} links={link.links} />
                 :
-                    <a key={key} href={link.url}>{link.name}</a>
+                    <Link onClick={() => setMobileMenuState(false)} key={key} to={link.url}>{link.name}</Link>
                 )}
             </div>
         </header>
