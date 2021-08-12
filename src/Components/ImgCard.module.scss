@@ -9,11 +9,12 @@
     }
     > h2{
         position: absolute;
+        text-transform: uppercase;
         padding: 1rem;
         margin: 0;
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: rgba(185, 185, 185, 0.5);
+        background-color: rgba(185, 185, 185, 0.6);
     }
 }

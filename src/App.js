@@ -3,21 +3,30 @@ import Card from './Components/Card'
 import ImageCard from './Components/ImageCard'
 import Weather from './Components/Weather'
 import ImgCard from './Components/ImgCard'
+import Form from './Components/Form'
+import Button from './Components/Button'
+import Heading from './Components/Heading'
 
 function App() {
   return (
     <div>
       <Header />
       <main className="container md-flex p-y-1 space-2">
-        <Card className="primary flex-1" title='Welcome'>
-          Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit, sed
-          do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis
-          nostrud exercitation ullamco
-          laboris nisi ut aliquip ex ea
-          commodo consequat.
+        <Card className="primary flex-1 flex flex-col justify-between m-x-1-5">
+          <div>
+            <Heading>Welcome</Heading>
+            Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut
+            labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis
+            nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </div>
+          <div className="flex items-right p-t-1-5">
+            <Button>Learn More</Button>
+          </div>
         </Card>
         <ImageCard className="md-w-66" title='Ui/Ux Design' img='alexandra-gorn-VBo24-Ys6gQ.jpg'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -42,8 +51,9 @@ function App() {
       </section>
       <section className="container">
         <Card title='Contact'>
-          <div className="md-flex flex-row">
-            <div className="md-w-66">
+          <div className="md-flex flex-row md-space-x-1 space-y-1">
+            <div className="flex-1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
               ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
               ullamco laboris nisi ut aliquip ex ea commodo consequat.
               <br /><br />
@@ -55,8 +65,8 @@ function App() {
               ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
               ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </div>
-            <div className="flex-1">
-
+            <div className="md-w-25">
+              <Form />
             </div>
           </div>
         </Card>

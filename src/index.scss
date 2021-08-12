@@ -33,15 +33,19 @@ code {
 }
 
 .flex{
-  display: flex;
-}
-
-.flex-row{
-  flex-direction: row;
+  display: flex !important;
 }
 
 .flex-col{
-  flex-direction: column;
+  flex-direction: column !important;
+}
+
+.justify-between{
+  justify-content: space-between !important;
+}
+
+.flex-row{
+  flex-direction: row !important;
 }
 
 .flex-1{
@@ -51,6 +55,12 @@ code {
 .md-w-33{
   @media (min-width: $mobile-screen) {
     width: 33.333333%;
+  }
+}
+
+.md-w-25{
+  @media (min-width: $mobile-screen) {
+    width: 25%;
   }
 }
 
@@ -118,6 +128,25 @@ code {
   padding-bottom: 1rem;
 }
 
+.p-t-1{
+  padding-top: 1rem;
+}
+
+.m-x-1-5{
+  margin: 0 1.5rem;
+}
+
+.p-t-1-5{
+  padding-top: 1.5rem;
+}
+
+.md-p-t-1{
+  @media (min-width: $mobile-screen) {
+    padding-top: 1rem;
+  }
+}
+
+
 .p-b-0{
   padding-bottom: 0 !important;
 }
@@ -143,17 +172,18 @@ code {
   background-color: $primary-color;
   color: white;
 
-  span{
+  span, button{
     border-color: white !important;
+    color: white;
   }
-}
-
-.justify-between{
-  justify-content: space-between;
 }
 
 .items-center{
   align-items: center;
+}
+
+.items-right{
+  justify-content: flex-end;
 }
 
 .hidden{

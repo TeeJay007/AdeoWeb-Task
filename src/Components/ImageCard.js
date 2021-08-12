@@ -1,14 +1,14 @@
 import {card} from './ImageCard.module.scss'
 
-const ImageCard = ({title, img, children, className}) => {
+const ImageCard = ({title, img, children, className = '', alt}) => {
     return (
         <div className={`${card} ${className}`}>
-          <img src={img} alt="coffee mug" />
+          <img src={img} alt={alt} />
           <div>
             <h2>{title}</h2>
-            <p>
+            <div>
                 {children}
-            </p>
+            </div>
           </div>
         </div>
     )

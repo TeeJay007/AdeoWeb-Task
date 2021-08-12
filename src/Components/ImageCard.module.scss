@@ -3,16 +3,18 @@
 .card{
     display: flex;
     flex-direction: column;
-    margin: 0 1rem;
+    margin: 0 1.5rem;
+    background-color: $light-color;
 
     >img{
         width: 100%;
     }
     >div > h2{
+        margin: 0;
+        margin-bottom: 1rem;
         text-transform: uppercase;
     }
     >div{
-        background-color: $light-color;
-        padding: 0 2rem;
+        padding: 1.5rem 2rem;
     }
 }

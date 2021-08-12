@@ -1,0 +1,28 @@
+@import '../global.scss';
+
+.mainForm{
+    display: flex;
+    flex-direction: column;
+    
+    @media (min-width: $mobile-screen) {
+        display: block;
+    }
+
+    .formField{
+        display: flex;
+        flex-direction: column;
+        >label{
+            text-transform: uppercase;
+            font-weight: bold;
+            padding-bottom: 0.5rem;
+        }
+        >input[type='text'], >input[type='email'], >textarea{
+            border: 2px solid $light-color;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+        }
+        >textarea{
+            height: 7rem;
+        }
+    }
+}
