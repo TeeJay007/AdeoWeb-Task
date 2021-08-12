@@ -13,7 +13,7 @@ const Footer = ({mainLinks = []}) => {
                     </div>
                     <div className={footerLinks}>
                         <div>
-                            {mainLinks.map((link, k) => <a href={link.url || '#'}>{link.name}</a>)}
+                            {mainLinks.map((link, k) => <a key={k} href={link.url || '#'}>{link.name}</a>)}
                         </div>
                     </div>
                 </div>
