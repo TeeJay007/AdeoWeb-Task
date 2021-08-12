@@ -13,33 +13,8 @@ import {
 
 import {useState} from 'react'
 
-const Header = () => {
+const Header = ({mainLinks = [], topLinks = []}) => {
     const [mobileMenuState, setMobileMenuState] = useState(false)
-
-    const topLinks = [
-        { name: 'Menu', url: '#' },
-        { name: 'Some text', url: '#' },
-        { name: 'Another item', url: '#' },
-        { name: 'One more', url: '#' },
-        { name: 'And last one', url: '#' }
-    ]
-
-    const mainLinks = [
-        { name: 'Home', url: '#' },
-        { name: 'Service', url: '#' },
-        {
-            name: 'Works',
-            links: [
-                { name: 'All', url: '#' },
-                { name: 'Graphic', url: '#' },
-                { name: 'Design', url: '#' },
-                { name: 'Logo', url: '#' },
-                { name: 'Website', url: '#' }
-            ]
-        },
-        { name: 'About me', url: '#' },
-        { name: 'Contact', url: '#' }
-    ]
 
     const MobileGroupList = ({title, links}) => {
         const [isOpen, setIsOpen] = useState(false)

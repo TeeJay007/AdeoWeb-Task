@@ -6,11 +6,37 @@ import ImgCard from './Components/ImgCard'
 import Form from './Components/Form'
 import Button from './Components/Button'
 import Heading from './Components/Heading'
+import Footer from './Components/Footer'
 
 function App() {
+  const topLinks = [
+      { name: 'Menu', url: '#' },
+      { name: 'Some text', url: '#' },
+      { name: 'Another item', url: '#' },
+      { name: 'One more', url: '#' },
+      { name: 'And last one', url: '#' }
+  ]
+
+  const mainLinks = [
+      { name: 'Home', url: '#' },
+      { name: 'Service', url: '#' },
+      {
+          name: 'Works',
+          links: [
+              { name: 'All', url: '#' },
+              { name: 'Graphic', url: '#' },
+              { name: 'Design', url: '#' },
+              { name: 'Logo', url: '#' },
+              { name: 'Website', url: '#' }
+          ]
+      },
+      { name: 'About me', url: '#' },
+      { name: 'Contact', url: '#' }
+  ]
+
   return (
     <div>
-      <Header />
+      <Header mainLinks={mainLinks} topLinks={topLinks} />
       <main className="container md-flex p-y-1 space-2">
         <Card className="primary flex-1 flex flex-col justify-between m-x-1-5">
           <div>
@@ -71,6 +97,7 @@ function App() {
           </div>
         </Card>
       </section>
+      <Footer mainLinks={mainLinks} />
     </div>
   );
 }
