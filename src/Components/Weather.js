@@ -3,6 +3,36 @@ import {useState, useEffect} from 'react'
 
 const API_URL = 'https://meteocors.herokuapp.com/weather/kaunas'
 
+export const WeatherIcon = ({weatherData}) => {
+    if(!weatherData)
+        return <img src="/sunglasses.svg" alt="sunglasses" />
+
+    const {conditionCode} = weatherData;
+    if(!conditionCode)
+        return <img src="/sunglasses.svg" alt="sunglasses" />
+
+    switch(conditionCode){
+        case 'overcast':
+        case 'light-rain':
+        case 'moderate-rain':
+        case 'heavy-rain':
+        case 'fog':
+            return <img src="/umbrella.svg" alt="umbrella" />
+
+        case 'sleet':
+        case 'light-snow':
+        case 'moderate-snow':
+        case 'heavy-snow':
+            return <img src="/snowflake.svg" alt="snowflake" />
+
+        case 'clear':
+        case 'isolated-clouds':
+        case 'scattered-clouds':
+        default:
+            return <img src="/sunglasses.svg" alt="sunglasses" />
+    }
+}
+
 const Weather = ({className = ''}) => {
     const [weatherData, setWeatherData] = useState()
 
@@ -31,36 +61,6 @@ const Weather = ({className = ''}) => {
             }
         }).catch(err => console.error(err))
     }, [])
-
-    const WeatherIcon = ({weatherData}) => {
-        if(!weatherData)
-            return <img src="/sunglasses.svg" alt="" />
-
-        const {conditionCode} = weatherData;
-        if(!conditionCode)
-            return <img src="/sunglasses.svg" alt="" />
-
-        switch(conditionCode){
-            case 'overcast':
-            case 'light-rain':
-            case 'moderate-rain':
-            case 'heavy-rain':
-            case 'fog':
-                return <img src="/umbrella.svg" alt="umbrella" />
-
-            case 'sleet':
-            case 'light-snow':
-            case 'moderate-snow':
-            case 'heavy-snow':
-                return <img src="/snowflake.svg" alt="snowflake" />
-
-            case 'clear':
-            case 'isolated-clouds':
-            case 'scattered-clouds':
-            default:
-                return <img src="/sunglasses.svg" alt="sunglasses" />
-        }
-    }
 
     return (
         <div className={`${className} ${weather}`}>
