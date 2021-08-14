@@ -35,7 +35,7 @@ const Header = ({mainLinks = [], topLinks = []}) => {
 
     return (
         <header>
-            <div className="bg-primary">
+            <nav className="bg-primary">
                 <div className={`container ${header}`}>
                     <div className={headerTop}>
                         {topLinks.map((link, k) => <Link key={k} to={link.url}>{link.name}</Link>)}
@@ -66,7 +66,7 @@ const Header = ({mainLinks = [], topLinks = []}) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </nav>
             <div className={`${mobileMenuState ? '' : 'hidden '} ${mobileMenu}`}>
                 {mainLinks.map((link, key) => link.links ? 
                     <MobileGroupList key={key} title={link.name} links={link.links} />

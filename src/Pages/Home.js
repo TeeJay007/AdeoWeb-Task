@@ -11,7 +11,7 @@ import React from "react";
 function Home() {
   return (
     <div>
-      <main className="container md-flex p-y-1 space-2">
+      <section className="container md-flex p-y-1 space-2">
         <Card className="primary flex-1 flex flex-col justify-between m-x-1-5">
           <div>
             <Heading>Welcome</Heading>
@@ -37,7 +37,7 @@ function Home() {
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
           nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </ImageCard>
-      </main>
+      </section>
       <section className="container">
         <Card className="p-b-0" title='Products' subtitle="Offers today">
           <div className="md-flex md-space-x-1">

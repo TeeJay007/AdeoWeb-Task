@@ -40,12 +40,14 @@ function App({navigateTo}) {
   return (
     <Router>
       <Header mainLinks={mainLinks} topLinks={topLinks} />
-      <Switch>
-          <Route path="/services" component={Services} />
-          <Route path="/about-me" component={AboutMe} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/" component={Home} />
-      </Switch>
+      <main>
+        <Switch>
+            <Route path="/services" component={Services} />
+            <Route path="/about-me" component={AboutMe} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/" component={Home} />
+        </Switch>
+      </main>
       <Footer mainLinks={mainLinks} />
     </Router>
   );
