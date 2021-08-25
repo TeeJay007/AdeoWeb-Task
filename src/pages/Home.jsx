@@ -43,7 +43,10 @@ function Home() {
       <section className="container">
         <Card className="p-b-0" title="Products" subtitle="Offers today">
           <div className="md-flex md-space-x-1">
-            <Weather className="flex-1 p-b-1 md-p-b-0" />
+            <Weather
+              cities={['Vilnius', 'Kaunas']}
+              className="flex-1 m-b-1 md-m-b-0"
+            />
             <div className="flex-1 flex flex-col space-y-1">
               <ImgCard
                 className="flex-1"

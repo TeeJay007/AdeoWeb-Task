@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { weather } from './Weather.module.scss';
 
-const API_URL = 'https://meteocors.herokuapp.com/weather/kaunas';
+const API_URL = 'https://meteocors.herokuapp.com/weather/';
 
-export const WeatherIcon = ({ weatherData }) => {
+const WeatherIcon = ({ weatherData }) => {
   if (!weatherData) return <img src="/sunglasses.svg" alt="sunglasses" />;
 
   const { conditionCode } = weatherData;
@@ -42,11 +42,12 @@ WeatherIcon.defaultProps = {
   weatherData: {},
 };
 
-const Weather = ({ className }) => {
+const Weather = ({ className, cities }) => {
   const [weatherData, setWeatherData] = useState();
+  const [selectedCity, setSelectedCity] = useState(cities[0]);
 
   useEffect(() => {
-    fetch(API_URL, {
+    fetch(API_URL + selectedCity, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -55,16 +56,17 @@ const Weather = ({ className }) => {
       .then((data) => {
         try {
           const { forecastTimestamps } = data;
+          const currentDate = Date.now();
           const currentWeather = forecastTimestamps
             .sort((a, b) => {
               if (
-                Math.abs(Date.now() - new Date(a.forecastTimeUtc)) ===
-                Math.abs(Date.now() - new Date(b.forecastTimeUtc))
+                Math.abs(currentDate - new Date(a.forecastTimeUtc)) ===
+                Math.abs(currentDate - new Date(b.forecastTimeUtc))
               )
                 return 0;
               if (
-                Math.abs(Date.now() - new Date(a.forecastTimeUtc)) <
-                Math.abs(Date.now() - new Date(b.forecastTimeUtc))
+                Math.abs(currentDate - new Date(a.forecastTimeUtc)) <
+                Math.abs(currentDate - new Date(b.forecastTimeUtc))
               )
                 return -1;
               return 1;
@@ -79,21 +81,32 @@ const Weather = ({ className }) => {
       .catch((err) => {
         throw err;
       });
-  }, []);
+  }, [selectedCity]);
 
   return (
     <div className={`${className} ${weather}`}>
       <WeatherIcon weatherData={weatherData} />
+      {cities.length > 1 && (
+        <select onChange={(e) => setSelectedCity(e.target.value)}>
+          {cities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 };
 
 Weather.propTypes = {
   className: PropTypes.string,
+  cities: PropTypes.arrayOf(String),
 };
 
 Weather.defaultProps = {
   className: '',
+  cities: ['Vilnius'],
 };
 
 export default Weather;

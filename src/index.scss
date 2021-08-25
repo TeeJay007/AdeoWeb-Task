@@ -165,7 +165,15 @@ code {
   }
 }
 
+.m-b-1{
+  margin-bottom: 1rem;
+}
 
+.md-m-b-0{
+  @media (min-width: $mobile-screen) {
+    margin-bottom: 0 !important;
+  }
+}
 .p-b-0{
   padding-bottom: 0 !important;
 }

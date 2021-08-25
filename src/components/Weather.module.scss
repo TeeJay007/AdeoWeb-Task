@@ -1,7 +1,22 @@
+@import '../global.scss';
+
 .weather{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    position: relative;
     > img{
         width: 100%;
+    }
+    > select{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        border: 0;
+        background-color: white;
+        color: $primary-color;
+        border: 2px solid $primary-color;
+        font-size: 1rem;
     }
 }
