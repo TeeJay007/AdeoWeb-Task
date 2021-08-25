@@ -2,11 +2,7 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { weather } from './Weather.module.scss';
 
-const API_URL = 'https://meteocors.herokuapp.com/weather/';
-
 const WeatherIcon = ({ weatherData }) => {
-  if (!weatherData) return <img src="/sunglasses.svg" alt="sunglasses" />;
-
   const { conditionCode } = weatherData;
   if (!conditionCode) return <img src="/sunglasses.svg" alt="sunglasses" />;
 
@@ -42,12 +38,12 @@ WeatherIcon.defaultProps = {
   weatherData: {},
 };
 
-const Weather = ({ className, cities }) => {
+const Weather = ({ className, cities, apiUrl }) => {
   const [weatherData, setWeatherData] = useState();
-  const [selectedCity, setSelectedCity] = useState(cities[0]);
+  const [selectedCity, setSelectedCity] = useState(cities[0].code);
 
   useEffect(() => {
-    fetch(API_URL + selectedCity, {
+    fetch(`${apiUrl}/${selectedCity}`, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -72,7 +68,6 @@ const Weather = ({ className, cities }) => {
               return 1;
             })
             .shift();
-
           setWeatherData(currentWeather);
         } catch (e) {
           throw new Error(e);
@@ -89,8 +84,8 @@ const Weather = ({ className, cities }) => {
       {cities.length > 1 && (
         <select onChange={(e) => setSelectedCity(e.target.value)}>
           {cities.map((city) => (
-            <option key={city} value={city}>
-              {city}
+            <option key={city.code} value={city.code}>
+              {city.name}
             </option>
           ))}
         </select>
@@ -102,11 +97,18 @@ const Weather = ({ className, cities }) => {
 Weather.propTypes = {
   className: PropTypes.string,
   cities: PropTypes.arrayOf(String),
+  apiUrl: PropTypes.string,
 };
 
 Weather.defaultProps = {
   className: '',
-  cities: ['Vilnius'],
+  cities: [
+    {
+      code: 'vilnius',
+      name: 'Vilnius',
+    },
+  ],
+  apiUrl: process.env.REACT_APP_WEATHER_API_URL,
 };
 
 export default Weather;

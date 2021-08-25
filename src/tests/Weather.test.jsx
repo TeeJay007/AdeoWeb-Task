@@ -1,178 +1,142 @@
-import { render, screen } from '@testing-library/react';
-import { WeatherIcon } from '../components/Weather';
+import { render, waitFor } from '@testing-library/react';
+import Weather from '../components/Weather';
+import mockData from './weatherMockResp.json';
 
-test('Check empty WeatherIcon', () => {
-  render(<WeatherIcon />);
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/sunglasses.svg');
-  expect(Icon).toHaveAttribute('alt', 'sunglasses');
+// eslint-disable-next-line no-unused-vars
+const mockFetch = (data) => (_url) =>
+  new Promise((resolve) => {
+    resolve({
+      json: () => Promise.resolve(data),
+    });
+  });
+
+afterEach(() => {
+  jest.restoreAllMocks();
 });
 
-test('Check clear weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'clear',
-      }}
-    />
+const generateWeatherFetch = (conditionCode) => {
+  if (!conditionCode)
+    jest.spyOn(global, 'fetch').mockImplementation(mockFetch({}));
+
+  return jest.spyOn(global, 'fetch').mockImplementation(
+    mockFetch({
+      ...mockData,
+      forecastTimestamps: mockData.forecastTimestamps.map((v) => ({
+        ...v,
+        conditionCode,
+      })),
+    })
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/sunglasses.svg');
-  expect(Icon).toHaveAttribute('alt', 'sunglasses');
+};
+
+test('Check empty response', async () => {
+  generateWeatherFetch();
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('sunglasses')).toHaveAttribute('src', '/sunglasses.svg')
+  );
 });
 
-test('Check isolated-clouds weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'isolated-clouds',
-      }}
-    />
+test('Check clear weather', async () => {
+  generateWeatherFetch('clear');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('sunglasses')).toHaveAttribute('src', '/sunglasses.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/sunglasses.svg');
-  expect(Icon).toHaveAttribute('alt', 'sunglasses');
 });
 
-test('Check scattered-clouds weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'scattered-clouds',
-      }}
-    />
+test('Check isolated-clouds weather', async () => {
+  generateWeatherFetch('isolated-clouds');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('sunglasses')).toHaveAttribute('src', '/sunglasses.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/sunglasses.svg');
-  expect(Icon).toHaveAttribute('alt', 'sunglasses');
 });
 
-test('Check n/a weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'na',
-      }}
-    />
+test('Check scattered-clouds weather', async () => {
+  generateWeatherFetch('scattered-clouds');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('sunglasses')).toHaveAttribute('src', '/sunglasses.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/sunglasses.svg');
-  expect(Icon).toHaveAttribute('alt', 'sunglasses');
 });
 
-test('Check overcast weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'overcast',
-      }}
-    />
+test('Check n/a weather', async () => {
+  generateWeatherFetch('na');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('sunglasses')).toHaveAttribute('src', '/sunglasses.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/umbrella.svg');
-  expect(Icon).toHaveAttribute('alt', 'umbrella');
 });
 
-test('Check light-rain weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'light-rain',
-      }}
-    />
+test('Check overcast weather', async () => {
+  generateWeatherFetch('overcast');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('umbrella')).toHaveAttribute('src', '/umbrella.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/umbrella.svg');
-  expect(Icon).toHaveAttribute('alt', 'umbrella');
 });
 
-test('Check moderate-rain weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'moderate-rain',
-      }}
-    />
+test('Check light-rain weather', async () => {
+  generateWeatherFetch('light-rain');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('umbrella')).toHaveAttribute('src', '/umbrella.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/umbrella.svg');
-  expect(Icon).toHaveAttribute('alt', 'umbrella');
 });
 
-test('Check heavy-rain weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'heavy-rain',
-      }}
-    />
+test('Check moderate-rain weather', async () => {
+  generateWeatherFetch('moderate-rain');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('umbrella')).toHaveAttribute('src', '/umbrella.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/umbrella.svg');
-  expect(Icon).toHaveAttribute('alt', 'umbrella');
 });
 
-test('Check fog weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'fog',
-      }}
-    />
+test('Check heavy-rain weather', async () => {
+  generateWeatherFetch('heavy-rain');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('umbrella')).toHaveAttribute('src', '/umbrella.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/umbrella.svg');
-  expect(Icon).toHaveAttribute('alt', 'umbrella');
 });
 
-test('Check sleet weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'sleet',
-      }}
-    />
+test('Check fog weather', async () => {
+  generateWeatherFetch('fog');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('umbrella')).toHaveAttribute('src', '/umbrella.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/snowflake.svg');
-  expect(Icon).toHaveAttribute('alt', 'snowflake');
 });
 
-test('Check light-snow weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'light-snow',
-      }}
-    />
+test('Check sleet weather', async () => {
+  generateWeatherFetch('sleet');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('snowflake')).toHaveAttribute('src', '/snowflake.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/snowflake.svg');
-  expect(Icon).toHaveAttribute('alt', 'snowflake');
 });
 
-test('Check moderate-snow weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'moderate-snow',
-      }}
-    />
+test('Check light-snow weather', async () => {
+  generateWeatherFetch('light-snow');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('snowflake')).toHaveAttribute('src', '/snowflake.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/snowflake.svg');
-  expect(Icon).toHaveAttribute('alt', 'snowflake');
 });
 
-test('Check heavy-snow weather', () => {
-  render(
-    <WeatherIcon
-      weatherData={{
-        conditionCode: 'heavy-snow',
-      }}
-    />
+test('Check moderate-snow weather', async () => {
+  generateWeatherFetch('moderate-snow');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('snowflake')).toHaveAttribute('src', '/snowflake.svg')
   );
-  const Icon = screen.getByRole('img');
-  expect(Icon).toHaveAttribute('src', '/snowflake.svg');
-  expect(Icon).toHaveAttribute('alt', 'snowflake');
+});
+
+test('Check heavy-snow weather', async () => {
+  generateWeatherFetch('heavy-snow');
+  const { getByAltText } = render(<Weather />);
+  await waitFor(() =>
+    expect(getByAltText('snowflake')).toHaveAttribute('src', '/snowflake.svg')
+  );
 });
